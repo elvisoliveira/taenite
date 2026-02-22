@@ -94,7 +94,7 @@ The `config` object passed to `start_build(config, callback)` must expose these 
 
 - `distro_name` (`str`): Distribution/product name.
 - `distro_version` (`str`): Version label used in ISO metadata and branding.
-- `desktop_environment` (`str`): Intended DE selection (`gnome`, `kde`, `xfce`, `mate`, `cinnamon`). Invalid values fall back to GNOME in the legacy setup script logic.
+- `desktop_environment` (`str`): Intended DE selection (`gnome`, `kde`, `xfce`, `mate`, `cinnamon`, `openbox`). Invalid values fall back to GNOME in the legacy setup script logic.
 
 ### Branding / Assets
 

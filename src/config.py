@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 class BuildConfig:
     distro_name: str = "TaeniteOS"
     distro_version: str = "1.0"
-    desktop_environment: str = "gnome"
+    desktop_environment: str = "openbox"
 
     calamares_branding_product_name: str = "TaeniteOS"
     calamares_branding_short_product_name: str = "Taenite"

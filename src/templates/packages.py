@@ -9,7 +9,7 @@ def generate_desktop_package_list(config):
     return "task-desktop"
 
 def generate_desktop_env_package_list(config):
-    return DESKTOP_ENVIRONMENTS.get(config.desktop_environment, "gnome gdm3")
+    return DESKTOP_ENVIRONMENTS.get(config.desktop_environment, "openbox lightdm")
 
 def generate_common_package_list():
     return " ".join(COMMON_PACKAGES)

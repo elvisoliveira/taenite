@@ -111,7 +111,7 @@ mkdir -p /etc/skel/Desktop
 chmod 755 /etc/skel/Desktop
 
 # Set a known password for the live user (for Calamares)
-echo "live:live" | chpasswd
+# echo "live:live" | chpasswd
 
 # Configure autologin if enabled
 if [ "{str(config.enable_autologin).lower()}" = "true" ]; then

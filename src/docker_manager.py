@@ -27,8 +27,6 @@ from src.templates.packages import (
     generate_common_package_list,
     generate_dev_tools_package_list,
     generate_restricted_package_list,
-    generate_flatpak_package_list,
-    generate_snap_package_list,
     generate_ssh_package_list,
     generate_firewall_package_list,
     generate_installer_package_list,
@@ -92,8 +90,6 @@ class DockerManager:
         optional_lists = {
             "dev-tools.list.chroot": generate_dev_tools_package_list(config),
             "restricted.list.chroot": generate_restricted_package_list(config),
-            "flatpak.list.chroot": generate_flatpak_package_list(config),
-            "snap.list.chroot": generate_snap_package_list(config),
             "ssh.list.chroot": generate_ssh_package_list(config),
             "firewall.list.chroot": generate_firewall_package_list(config),
         }
