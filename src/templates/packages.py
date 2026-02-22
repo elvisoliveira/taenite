@@ -4,7 +4,6 @@ from src.constants import (
     THEME_PACKAGES,
     DEV_TOOLS_PACKAGES,
     VM_TOOLS_PACKAGES,
-    CODEC_PACKAGES,
     RESTRICTED_PACKAGES,
 )
 
@@ -38,13 +37,6 @@ def generate_vm_tools_package_list(config):
     if config.include_vm_support:
         return " ".join(VM_TOOLS_PACKAGES)
     return ""
-
-
-def generate_codec_package_list(config):
-    if config.include_codecs:
-        return " ".join(CODEC_PACKAGES)
-    return ""
-
 
 def generate_restricted_package_list(config):
     if config.include_restricted:

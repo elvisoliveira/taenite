@@ -49,5 +49,4 @@ packages:
 # Additional Features
 include_dev_tools: false
 include_vm_support: false
-include_codecs: true
 include_restricted: false

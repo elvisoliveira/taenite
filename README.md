@@ -155,7 +155,6 @@ The generated shell template references additional toggles, but `taenite.py` doe
 
 - `include_dev_tools`
 - `include_vm_support`
-- `include_codecs`
 - `include_restricted`
 
 These currently have no direct `config.<name>` source in this file.

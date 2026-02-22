@@ -44,13 +44,6 @@ VM_TOOLS_PACKAGES = [
     "qemu-guest-agent",
 ]
 
-CODEC_PACKAGES = [
-    "ffmpeg",
-    "gstreamer1.0-plugins-good",
-    "gstreamer1.0-plugins-bad",
-    "gstreamer1.0-plugins-ugly",
-]
-
 RESTRICTED_PACKAGES = [
     "unrar",
     "libavcodec-extra",

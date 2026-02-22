@@ -28,7 +28,6 @@ from src.templates.packages import (
     generate_theme_package_list,
     generate_dev_tools_package_list,
     generate_vm_tools_package_list,
-    generate_codec_package_list,
     generate_restricted_package_list,
     generate_flatpak_package_list,
     generate_snap_package_list,
@@ -99,7 +98,6 @@ class DockerManager:
         optional_lists = {
             "dev-tools.list.chroot": generate_dev_tools_package_list(config),
             "vm-tools.list.chroot": generate_vm_tools_package_list(config),
-            "codecs.list.chroot": generate_codec_package_list(config),
             "restricted.list.chroot": generate_restricted_package_list(config),
             "flatpak.list.chroot": generate_flatpak_package_list(config),
             "snap.list.chroot": generate_snap_package_list(config),

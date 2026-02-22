@@ -39,7 +39,6 @@ class BuildConfig:
 
     include_dev_tools: bool = False
     include_vm_support: bool = False
-    include_codecs: bool = False
     include_restricted: bool = False
 
     @classmethod
