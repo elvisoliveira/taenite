@@ -1,0 +1,11 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Generated build context (from `python3 taenite.py`)
+assets/
+calamares/
+config/
+setup.sh
+Dockerfile
+output/
