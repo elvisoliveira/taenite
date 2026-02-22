@@ -1,0 +1,53 @@
+# Taenite build configuration
+# Converted from .env file
+
+# Basic Distribution Settings
+distro_name: TaeniteOS
+distro_version: 1.0
+desktop_environment: gnome
+
+# Branding (Calamares Installer)
+calamares_branding_product_name: TaeniteOS
+calamares_branding_short_product_name: Taenite
+calamares_branding_version: 1.0
+calamares_branding_short_version: 1.0
+
+# Assets (absolute or relative paths)
+logo_path: ./assets/logo.png
+wallpaper_path: ./assets/wallpaper.png
+
+# Theme Settings
+theme_name: Adwaita
+icon_theme: Papirus
+cursor_theme: Adwaita
+gtk_theme_dark: true
+
+# Localization and System Settings
+timezone: America/New_York
+locale: en_US.UTF-8
+keyboard_layout: us
+hostname_prefix: taenite
+
+# Features and Services
+enable_autologin: true
+enable_firewall: false
+enable_ssh: false
+enable_snap: false
+enable_flatpak: true
+
+# Boot Options
+boot_quiet: true
+boot_splash: true
+
+# Custom Packages (list format)
+packages:
+  - vim
+  - htop
+  - curl
+  - git
+
+# Additional Features
+include_dev_tools: false
+include_vm_support: false
+include_codecs: true
+include_restricted: false

@@ -1,12 +1,9 @@
 import os
 import shutil
+import logging
 
-try:
-    from loguru import logger
-except ImportError:
-    import logging
-    logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
-    logger = logging.getLogger("taenite")
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+logger = logging.getLogger("nanite")
 
 from src.constants import (
     BUILD_DIRECTORIES,

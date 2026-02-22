@@ -1,12 +1,9 @@
 import os
 import sys
+import logging
 
-try:
-    from loguru import logger
-except ImportError:
-    import logging
-    logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
-    logger = logging.getLogger("taenite")
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+logger = logging.getLogger("taenite")
 
 from src.config import BuildConfig
 from src.docker_manager import DockerManager
