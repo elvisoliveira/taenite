@@ -4,20 +4,17 @@ from src.constants import (
     DEBIAN_VERSION,
 )
 
-
 def generate_debian_sources():
     return f"""deb {DEFAULT_DEBIAN_MIRROR} {DEBIAN_VERSION} main contrib non-free non-free-firmware
 deb {DEBIAN_SECURITY_MIRROR} {DEBIAN_VERSION}-security main contrib non-free non-free-firmware
 deb {DEFAULT_DEBIAN_MIRROR} {DEBIAN_VERSION}-updates main contrib non-free non-free-firmware
 """
 
-
 def generate_debian_preferences():
     return """Package: *
 Pin: release o=Debian
 Pin-Priority: 900
 """
-
 
 def generate_boot_params(config):
     boot_params = f"boot=live components hostname={config.distro_name} username=live"
@@ -26,7 +23,6 @@ def generate_boot_params(config):
     if not config.boot_splash:
         boot_params += " plymouth.enable=0"
     return boot_params
-
 
 def generate_lb_config(config):
     boot_params = generate_boot_params(config)
@@ -43,7 +39,6 @@ def generate_lb_config(config):
   --apt-recommends false
 """
 
-
 def generate_setup_script(config):
     return f"""#!/bin/bash
 # Setup script for live-build configuration
@@ -55,7 +50,6 @@ distro_version="{config.distro_version}"
 # Execute live-build configuration
 {generate_lb_config(config)}
 """
-
 
 def generate_dockerfile(config):
     return """FROM debian:12

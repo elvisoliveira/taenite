@@ -66,11 +66,11 @@ BUILD_DIRECTORIES = [
     "config/includes.chroot/etc/skel/.config/autostart/",
     "config/includes.chroot/etc/skel/.config/gtk-3.0/",
     "config/includes.chroot/etc/skel/.config/gtk-4.0/",
+    "config/includes.chroot/etc/skel/Desktop/",
     "config/includes.chroot/usr/share/backgrounds/",
     "config/includes.chroot/usr/share/icons/",
-    "config/package-lists/",
     "config/includes.chroot/etc/calamares/branding/default/",
-    "config/includes.chroot/etc/skel/Desktop/",
     "config/hooks/live",
+    "config/package-lists/",
     "config/archives",
 ]

@@ -7,18 +7,14 @@ from src.constants import (
     RESTRICTED_PACKAGES,
 )
 
-
 def generate_desktop_package_list(config):
     return "task-desktop"
-
 
 def generate_desktop_env_package_list(config):
     return DESKTOP_ENVIRONMENTS.get(config.desktop_environment, "gnome gdm3")
 
-
 def generate_common_package_list():
     return " ".join(COMMON_PACKAGES)
-
 
 def generate_theme_package_list(config):
     packages = THEME_PACKAGES.copy()
@@ -26,12 +22,10 @@ def generate_theme_package_list(config):
         packages.append("papirus-icon-theme")
     return " ".join(packages)
 
-
 def generate_dev_tools_package_list(config):
     if config.include_dev_tools:
         return " ".join(DEV_TOOLS_PACKAGES)
     return ""
-
 
 def generate_vm_tools_package_list(config):
     if config.include_vm_support:
@@ -43,34 +37,28 @@ def generate_restricted_package_list(config):
         return " ".join(RESTRICTED_PACKAGES)
     return ""
 
-
 def generate_flatpak_package_list(config):
     if config.enable_flatpak:
         return "flatpak gnome-software-plugin-flatpak"
     return ""
-
 
 def generate_snap_package_list(config):
     if config.enable_snap:
         return "snapd"
     return ""
 
-
 def generate_ssh_package_list(config):
     if config.enable_ssh:
         return "openssh-server"
     return ""
-
 
 def generate_firewall_package_list(config):
     if config.enable_firewall:
         return "ufw gufw"
     return ""
 
-
 def generate_installer_package_list():
     return "calamares calamares-settings-debian"
-
 
 def generate_custom_package_list(config):
     return " ".join(config.packages)

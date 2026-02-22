@@ -1,6 +1,6 @@
+import yaml
 import json
 from dataclasses import dataclass, field
-
 
 @dataclass
 class BuildConfig:
@@ -47,7 +47,6 @@ class BuildConfig:
             raw = handle.read()
 
         try:
-            import yaml
             data = yaml.safe_load(raw) or {}
         except Exception:
             data = json.loads(raw)

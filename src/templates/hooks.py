@@ -10,7 +10,6 @@ ln -sf /usr/share/zoneinfo/{config.timezone} /etc/localtime
 echo "{config.timezone}" > /etc/timezone
 """
 
-
 def generate_keyboard_hook(config):
     return f"""#!/bin/bash
 # Set the keyboard layout
@@ -22,7 +21,6 @@ XKBOPTIONS=""
 BACKSPACE="guess"
 KEYBOARD
 """
-
 
 def generate_launcher_icon_hook(config):
     return f"""#!/bin/bash
@@ -47,7 +45,6 @@ DESKTOP
 chmod +x /etc/skel/Desktop/install-{config.distro_name}.desktop
 """
 
-
 def generate_sudo_hook():
     return """#!/bin/bash
 # Configure sudo for the live user (no password for calamares)
@@ -58,7 +55,6 @@ live ALL=(ALL) NOPASSWD: /usr/bin/calamares
 EOF
 chmod 440 /etc/sudoers.d/live-user
 """
-
 
 def generate_polkit_hook():
     return """#!/bin/bash
@@ -103,7 +99,6 @@ pkexec calamares
 EOL
 chmod +x /usr/local/bin/install-system
 """
-
 
 def generate_distro_info_hook(config):
     return f"""#!/bin/bash
@@ -158,7 +153,6 @@ if [ "{str(config.enable_firewall).lower()}" = "true" ]; then
 fi
 """
 
-
 def generate_package_fix_hook():
     return """#!/bin/bash
 # Set a less strict apt configuration for building
@@ -183,7 +177,6 @@ apt-get install --no-install-recommends -y passwd gcc-12-base libc6 gnupg ca-cer
 mkdir -p /var/cache/apt/archives/partial
 chmod 755 /var/cache/apt/archives/partial
 """
-
 
 def generate_apt_config_hook():
     return """#!/bin/bash

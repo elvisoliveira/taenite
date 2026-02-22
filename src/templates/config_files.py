@@ -11,7 +11,6 @@ gtk-xft-hintstyle=hintfull
 gtk-xft-rgba=rgb
 """
 
-
 def generate_custom_settings_desktop(config):
     return f"""[Desktop Entry]
 Type=Application
@@ -20,7 +19,6 @@ Exec=sh -c 'sleep 10 && gsettings set org.gnome.desktop.background picture-uri f
 Hidden=false
 X-GNOME-Autostart-enabled=true
 """
-
 
 def generate_os_release(config):
     distro_name_lower = config.distro_name.lower().replace(' ', '-')
@@ -35,7 +33,6 @@ HOME_URL="https://www.debian.org/"
 SUPPORT_URL="https://www.debian.org/support"
 BUG_REPORT_URL="https://bugs.debian.org/"
 """
-
 
 def generate_installer_desktop(config):
     return f"""[Desktop Entry]

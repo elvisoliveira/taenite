@@ -50,7 +50,6 @@ from src.templates.live_build import (
     generate_dockerfile,
 )
 
-
 class DockerManager:
     def __init__(self):
         self.temp_dir = None
@@ -61,13 +60,13 @@ class DockerManager:
 
     def _copy_assets(self, config, build_dir):
         assets_dir = os.path.join(build_dir, "assets")
-        
+
         if config.logo_path and os.path.exists(config.logo_path):
             shutil.copy(
                 config.logo_path,
                 os.path.join(assets_dir, DEFAULT_LOGO_FILENAME)
             )
-        
+
         if config.wallpaper_path and os.path.exists(config.wallpaper_path):
             shutil.copy(
                 config.wallpaper_path,
@@ -85,7 +84,7 @@ class DockerManager:
 
     def _write_package_lists(self, config, build_dir):
         package_lists_dir = os.path.join(build_dir, "config/package-lists")
-        
+
         package_lists = {
             "installer.list.chroot": generate_installer_package_list(),
             "desktop.list.chroot": generate_desktop_package_list(config),
@@ -94,7 +93,7 @@ class DockerManager:
             "themes.list.chroot": generate_theme_package_list(config),
             "custom.list.chroot": generate_custom_package_list(config),
         }
-        
+
         optional_lists = {
             "dev-tools.list.chroot": generate_dev_tools_package_list(config),
             "vm-tools.list.chroot": generate_vm_tools_package_list(config),
@@ -104,12 +103,12 @@ class DockerManager:
             "ssh.list.chroot": generate_ssh_package_list(config),
             "firewall.list.chroot": generate_firewall_package_list(config),
         }
-        
+
         for filename, content in package_lists.items():
             if content:
                 with open(os.path.join(package_lists_dir, filename), "w") as f:
                     f.write(content)
-        
+
         for filename, content in optional_lists.items():
             if content:
                 with open(os.path.join(package_lists_dir, filename), "w") as f:
@@ -117,33 +116,34 @@ class DockerManager:
 
     def _write_config_files(self, config, build_dir):
         includes_dir = os.path.join(build_dir, "config/includes.chroot")
-        
+
         gtk3_settings = os.path.join(includes_dir, "etc/skel/.config/gtk-3.0/settings.ini")
         with open(gtk3_settings, "w") as f:
             f.write(generate_gtk_settings(config))
-        
+
         gtk4_settings = os.path.join(includes_dir, "etc/skel/.config/gtk-4.0/settings.ini")
         shutil.copy(gtk3_settings, gtk4_settings)
-        
+
         autostart_desktop = os.path.join(
             includes_dir,
             "etc/skel/.config/autostart/custom-settings.desktop"
         )
         with open(autostart_desktop, "w") as f:
             f.write(generate_custom_settings_desktop(config))
-        
+
         os_release = os.path.join(includes_dir, "etc/os-release")
         with open(os_release, "w") as f:
             f.write(generate_os_release(config))
-        
+
         installer_desktop = os.path.join(includes_dir, "etc/skel/Desktop/install.desktop")
         with open(installer_desktop, "w") as f:
             f.write(generate_installer_desktop(config))
+
         os.chmod(installer_desktop, 0o755)
 
     def _write_hooks(self, config, build_dir):
         hooks_dir = os.path.join(build_dir, "config/hooks/live")
-        
+
         hooks = {
             "0020-configure-apt.hook.chroot": generate_apt_config_hook(),
             "0025-fix-package-issues.hook.chroot": generate_package_fix_hook(),
@@ -154,7 +154,7 @@ class DockerManager:
             "0080-configure-polkit.hook.chroot": generate_polkit_hook(),
             "0090-update-distro-info.hook.chroot": generate_distro_info_hook(config),
         }
-        
+
         for filename, content in hooks.items():
             hook_file = os.path.join(hooks_dir, filename)
             with open(hook_file, "w") as f:
@@ -163,11 +163,11 @@ class DockerManager:
 
     def _write_apt_config(self, build_dir):
         archives_dir = os.path.join(build_dir, "config/archives")
-        
+
         sources_file = os.path.join(archives_dir, "debian.list.chroot")
         with open(sources_file, "w") as f:
             f.write(generate_debian_sources())
-        
+
         preferences_file = os.path.join(archives_dir, "debian.pref.chroot")
         with open(preferences_file, "w") as f:
             f.write(generate_debian_preferences())
@@ -186,7 +186,7 @@ class DockerManager:
     def _create_build_context(self, config, output_dir="."):
         self.temp_dir = os.path.abspath(output_dir)
         logger.debug(f"Using build directory: {self.temp_dir}")
-        
+
         self._create_build_directories(self.temp_dir)
         self._copy_assets(config, self.temp_dir)
         self._write_calamares_branding(config, self.temp_dir)
@@ -196,7 +196,7 @@ class DockerManager:
         self._write_apt_config(self.temp_dir)
         self._write_setup_script(config, self.temp_dir)
         self._write_dockerfile(config, self.temp_dir)
-        
+
         return self.temp_dir
 
     def start_build(self, config, callback, output_dir="."):
