@@ -1,5 +1,3 @@
-SUPPORTED_DESKTOPS = ["gnome", "kde", "xfce", "mate", "cinnamon"]
-
 DEFAULT_DEBIAN_MIRROR = "http://deb.debian.org/debian"
 DEBIAN_SECURITY_MIRROR = "http://security.debian.org/debian-security"
 DEBIAN_VERSION = "bookworm"
@@ -18,11 +16,6 @@ COMMON_PACKAGES = [
     "vlc",
 ]
 
-THEME_PACKAGES = [
-    "gnome-themes-extra",
-    "sassc",
-]
-
 DEV_TOOLS_PACKAGES = [
     "build-essential",
     "git",
@@ -33,13 +26,6 @@ DEV_TOOLS_PACKAGES = [
     "autoconf",
     "automake",
     "pkg-config",
-]
-
-VM_TOOLS_PACKAGES = [
-    "open-vm-tools",
-    "virtualbox-guest-x11",
-    "spice-vdagent",
-    "qemu-guest-agent",
 ]
 
 RESTRICTED_PACKAGES = [
@@ -54,6 +40,7 @@ DESKTOP_ENVIRONMENTS = {
     "xfce": "xfce4 xfce4-goodies lightdm",
     "mate": "mate-desktop-environment lightdm",
     "cinnamon": "cinnamon lightdm",
+    "openbox": "openbox lightdm",
 }
 
 BUILD_DIRECTORIES = [

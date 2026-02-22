@@ -25,9 +25,7 @@ from src.templates.packages import (
     generate_desktop_package_list,
     generate_desktop_env_package_list,
     generate_common_package_list,
-    generate_theme_package_list,
     generate_dev_tools_package_list,
-    generate_vm_tools_package_list,
     generate_restricted_package_list,
     generate_flatpak_package_list,
     generate_snap_package_list,
@@ -44,7 +42,6 @@ from src.templates.config_files import (
 from src.templates.live_build import (
     generate_debian_sources,
     generate_debian_preferences,
-    generate_lb_config,
     generate_setup_script,
     generate_dockerfile,
 )
@@ -89,13 +86,11 @@ class DockerManager:
             "desktop.list.chroot": generate_desktop_package_list(config),
             "desktop-env.list.chroot": generate_desktop_env_package_list(config),
             "common.list.chroot": generate_common_package_list(),
-            "themes.list.chroot": generate_theme_package_list(config),
             "custom.list.chroot": generate_custom_package_list(config),
         }
 
         optional_lists = {
             "dev-tools.list.chroot": generate_dev_tools_package_list(config),
-            "vm-tools.list.chroot": generate_vm_tools_package_list(config),
             "restricted.list.chroot": generate_restricted_package_list(config),
             "flatpak.list.chroot": generate_flatpak_package_list(config),
             "snap.list.chroot": generate_snap_package_list(config),

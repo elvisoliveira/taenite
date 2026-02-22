@@ -4,7 +4,7 @@
 # Basic Distribution Settings
 distro_name: TaeniteOS
 distro_version: 1.0
-desktop_environment: gnome
+desktop_environment: openbox
 
 # Branding (Calamares Installer)
 calamares_branding_product_name: TaeniteOS
@@ -26,8 +26,6 @@ hostname_prefix: taenite
 enable_autologin: true
 enable_firewall: false
 enable_ssh: false
-enable_snap: false
-enable_flatpak: true
 
 # Boot Options
 boot_quiet: true
@@ -42,5 +40,4 @@ packages:
 
 # Additional Features
 include_dev_tools: false
-include_vm_support: false
 include_restricted: false

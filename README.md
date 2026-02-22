@@ -117,8 +117,6 @@ The `config` object passed to `start_build(config, callback)` must expose these 
 - `enable_autologin` (`bool`): Sets display-manager autologin for `live` user.
 - `enable_firewall` (`bool`): Enables and configures UFW defaults.
 - `enable_ssh` (`bool`): Adds SSH package logic; also opens UFW ssh when firewall is enabled.
-- `enable_snap` (`bool`): Intended to include Snap packages.
-- `enable_flatpak` (`bool`): Intended to include Flatpak packages.
 
 ### Boot
 
@@ -138,7 +136,6 @@ The `config` object passed to `start_build(config, callback)` must expose these 
 The generated shell template references additional toggles, but `taenite.py` does not assign them from `config` before use:
 
 - `include_dev_tools`
-- `include_vm_support`
 - `include_restricted`
 
 These currently have no direct `config.<name>` source in this file.

@@ -24,8 +24,6 @@ class BuildConfig:
     enable_autologin: bool = True
     enable_firewall: bool = False
     enable_ssh: bool = False
-    enable_snap: bool = False
-    enable_flatpak: bool = False
 
     boot_quiet: bool = True
     boot_splash: bool = True
@@ -33,7 +31,6 @@ class BuildConfig:
     packages: list = field(default_factory=lambda: ["vim", "curl"])
 
     include_dev_tools: bool = False
-    include_vm_support: bool = False
     include_restricted: bool = False
 
     @classmethod

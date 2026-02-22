@@ -1,9 +1,7 @@
 from src.constants import (
     DESKTOP_ENVIRONMENTS,
     COMMON_PACKAGES,
-    THEME_PACKAGES,
     DEV_TOOLS_PACKAGES,
-    VM_TOOLS_PACKAGES,
     RESTRICTED_PACKAGES,
 )
 
@@ -16,33 +14,14 @@ def generate_desktop_env_package_list(config):
 def generate_common_package_list():
     return " ".join(COMMON_PACKAGES)
 
-def generate_theme_package_list(config):
-    packages = THEME_PACKAGES.copy()
-    return " ".join(packages)
-
 def generate_dev_tools_package_list(config):
     if config.include_dev_tools:
         return " ".join(DEV_TOOLS_PACKAGES)
     return ""
 
-def generate_vm_tools_package_list(config):
-    if config.include_vm_support:
-        return " ".join(VM_TOOLS_PACKAGES)
-    return ""
-
 def generate_restricted_package_list(config):
     if config.include_restricted:
         return " ".join(RESTRICTED_PACKAGES)
-    return ""
-
-def generate_flatpak_package_list(config):
-    if config.enable_flatpak:
-        return "flatpak gnome-software-plugin-flatpak"
-    return ""
-
-def generate_snap_package_list(config):
-    if config.enable_snap:
-        return "snapd"
     return ""
 
 def generate_ssh_package_list(config):
@@ -51,9 +30,7 @@ def generate_ssh_package_list(config):
     return ""
 
 def generate_firewall_package_list(config):
-    if config.enable_firewall:
-        return "ufw gufw"
-    return ""
+    return "ufw gufw" if config.enable_firewall else ""
 
 def generate_installer_package_list():
     return "calamares calamares-settings-debian"

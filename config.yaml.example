@@ -4,7 +4,7 @@
 # Basic Distribution Settings
 distro_name: MyDistro
 distro_version: 0.1
-desktop_environment: gnome
+desktop_environment: openbox
 
 # Branding (Calamares Installer)
 calamares_branding_product_name: MyDistro
@@ -26,8 +26,6 @@ hostname_prefix: mydistro
 enable_autologin: true
 enable_firewall: false
 enable_ssh: false
-enable_snap: false
-enable_flatpak: false
 
 # Boot Options
 boot_quiet: true
@@ -40,5 +38,4 @@ packages:
 
 # Additional Features
 include_dev_tools: false
-include_vm_support: false
 include_restricted: false
