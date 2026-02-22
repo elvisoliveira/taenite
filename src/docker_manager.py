@@ -3,7 +3,7 @@ import shutil
 import logging
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
-logger = logging.getLogger("nanite")
+logger = logging.getLogger("taenite")
 
 from src.constants import (
     BUILD_DIRECTORIES,
@@ -37,7 +37,6 @@ from src.templates.packages import (
     generate_custom_package_list,
 )
 from src.templates.config_files import (
-    generate_gtk_settings,
     generate_custom_settings_desktop,
     generate_os_release,
     generate_installer_desktop,
@@ -116,13 +115,6 @@ class DockerManager:
 
     def _write_config_files(self, config, build_dir):
         includes_dir = os.path.join(build_dir, "config/includes.chroot")
-
-        gtk3_settings = os.path.join(includes_dir, "etc/skel/.config/gtk-3.0/settings.ini")
-        with open(gtk3_settings, "w") as f:
-            f.write(generate_gtk_settings(config))
-
-        gtk4_settings = os.path.join(includes_dir, "etc/skel/.config/gtk-4.0/settings.ini")
-        shutil.copy(gtk3_settings, gtk4_settings)
 
         autostart_desktop = os.path.join(
             includes_dir,

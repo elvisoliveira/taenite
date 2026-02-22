@@ -16,12 +16,6 @@ calamares_branding_short_version: 0.1
 logo_path: ./assets/logo.png
 wallpaper_path: ./assets/wallpaper.png
 
-# Theme Settings
-theme_name: Adwaita
-icon_theme: Adwaita
-cursor_theme: Adwaita
-gtk_theme_dark: false
-
 # Localization and System Settings
 timezone: UTC
 locale: en_US.UTF-8

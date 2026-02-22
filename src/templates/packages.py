@@ -18,8 +18,6 @@ def generate_common_package_list():
 
 def generate_theme_package_list(config):
     packages = THEME_PACKAGES.copy()
-    if config.icon_theme != "Adwaita":
-        packages.append("papirus-icon-theme")
     return " ".join(packages)
 
 def generate_dev_tools_package_list(config):

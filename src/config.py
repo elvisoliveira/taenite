@@ -16,11 +16,6 @@ class BuildConfig:
     logo_path: str = ""
     wallpaper_path: str = ""
 
-    theme_name: str = "Adwaita"
-    icon_theme: str = "Adwaita"
-    cursor_theme: str = "Adwaita"
-    gtk_theme_dark: bool = False
-
     timezone: str = "UTC"
     locale: str = "en_US.UTF-8"
     keyboard_layout: str = "us"

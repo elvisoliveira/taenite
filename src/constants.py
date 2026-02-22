@@ -20,8 +20,6 @@ COMMON_PACKAGES = [
 
 THEME_PACKAGES = [
     "gnome-themes-extra",
-    "gtk2-engines-pixbuf",
-    "gtk2-engines-murrine",
     "sassc",
 ]
 
@@ -64,8 +62,6 @@ BUILD_DIRECTORIES = [
     "calamares",
     "config/includes.chroot/etc/skel/",
     "config/includes.chroot/etc/skel/.config/autostart/",
-    "config/includes.chroot/etc/skel/.config/gtk-3.0/",
-    "config/includes.chroot/etc/skel/.config/gtk-4.0/",
     "config/includes.chroot/etc/skel/Desktop/",
     "config/includes.chroot/usr/share/backgrounds/",
     "config/includes.chroot/usr/share/icons/",

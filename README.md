@@ -23,15 +23,6 @@ It supports two Docker execution modes:
 - Linux host with Docker installed and running
 - User allowed to access Docker (`docker` group or sudo)
 - Python 3
-- Python packages:
-  - `docker`
-  - `loguru`
-
-Install dependencies:
-
-```bash
-pip install docker loguru
-```
 
 ## Basic Usage
 
@@ -113,13 +104,6 @@ The `config` object passed to `start_build(config, callback)` must expose these 
 - `calamares_branding_short_product_name` (`str`)
 - `calamares_branding_version` (`str`)
 - `calamares_branding_short_version` (`str`)
-
-### Theme
-
-- `theme_name` (`str`): GTK theme name.
-- `icon_theme` (`str`): Icon theme name.
-- `cursor_theme` (`str`): Cursor theme name.
-- `gtk_theme_dark` (`bool`): Controls `gtk-application-prefer-dark-theme`.
 
 ### Localization / Host
 
