@@ -11,7 +11,8 @@ DEFAULT_PACKAGES = [
 ]
 
 COMMON_PACKAGES = [
-    "gparted",
+    "sudo",
+    "gparted"
 ]
 
 DEV_TOOLS_PACKAGES = [
