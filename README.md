@@ -136,7 +136,6 @@ The `config` object passed to `start_build(config, callback)` must expose these 
 The generated shell template references additional toggles, but `taenite.py` does not assign them from `config` before use:
 
 - `include_dev_tools`
-- `include_restricted`
 
 These currently have no direct `config.<name>` source in this file.
 

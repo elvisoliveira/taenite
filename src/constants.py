@@ -26,12 +26,6 @@ DEV_TOOLS_PACKAGES = [
     "pkg-config",
 ]
 
-RESTRICTED_PACKAGES = [
-    "unrar",
-    "libavcodec-extra",
-    "libdvd-pkg",
-]
-
 DESKTOP_ENVIRONMENTS = {
     "gnome": "gnome",
     "kde": "kde-standard",

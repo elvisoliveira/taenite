@@ -39,4 +39,3 @@ packages:
 
 # Additional Features
 include_dev_tools: false
-include_restricted: false

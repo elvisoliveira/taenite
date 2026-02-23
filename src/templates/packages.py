@@ -22,11 +22,6 @@ def generate_dev_tools_package_list(config):
         return " ".join(DEV_TOOLS_PACKAGES)
     return ""
 
-def generate_restricted_package_list(config):
-    if config.include_restricted:
-        return " ".join(RESTRICTED_PACKAGES)
-    return ""
-
 def generate_ssh_package_list(config):
     if config.enable_ssh:
         return "openssh-server"

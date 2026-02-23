@@ -32,7 +32,6 @@ class BuildConfig:
     packages: list = field(default_factory=lambda: ["vim", "curl"])
 
     include_dev_tools: bool = False
-    include_restricted: bool = False
 
     @classmethod
     def from_yaml_file(cls, config_path="config.yaml"):
