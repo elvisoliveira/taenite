@@ -52,7 +52,6 @@ BUILD_DIRECTORIES = [
     "assets",
     "calamares",
     "config/includes.chroot/etc/skel/",
-    "config/includes.chroot/etc/skel/.config/autostart/",
     "config/includes.chroot/etc/skel/Desktop/",
     "config/includes.chroot/usr/share/backgrounds/",
     "config/includes.chroot/usr/share/icons/",
