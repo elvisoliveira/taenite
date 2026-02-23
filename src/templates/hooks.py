@@ -22,29 +22,6 @@ BACKSPACE="guess"
 KEYBOARD
 """
 
-def generate_launcher_icon_hook(config):
-    return f"""#!/bin/bash
-# Create a desktop launcher with a larger icon for Calamares
-mkdir -p /etc/skel/Desktop
-cat > /etc/skel/Desktop/install-{config.distro_name}.desktop << DESKTOP
-[Desktop Entry]
-Type=Application
-Name=Install {config.distro_name}
-GenericName=System Installer
-Comment=Install {config.distro_name} on your computer
-Exec=sudo calamares
-Icon=/etc/calamares/branding/default/logo.png
-Terminal=false
-Categories=System;Qt;
-Keywords=calamares;system;installer;
-StartupNotify=true
-X-GNOME-UsesNotifications=true
-DESKTOP
-
-# Make the launcher executable
-chmod +x /etc/skel/Desktop/install-{config.distro_name}.desktop
-"""
-
 def generate_sudo_hook():
     return """#!/bin/bash
 # Configure sudo for the live user (no password for calamares)

@@ -14,7 +14,6 @@ from src.templates.calamares import generate_calamares_branding
 from src.templates.hooks import (
     generate_locale_timezone_hook,
     generate_keyboard_hook,
-    generate_launcher_icon_hook,
     generate_sudo_hook,
     generate_polkit_hook,
     generate_autologin_hook,
@@ -127,7 +126,6 @@ class DockerManager:
             "0025-fix-package-issues.hook.chroot": generate_package_fix_hook(),
             "0050-configure-locale-timezone.hook.chroot": generate_locale_timezone_hook(config),
             "0051-configure-keyboard.hook.chroot": generate_keyboard_hook(config),
-            "0060-create-launcher-icon.hook.chroot": generate_launcher_icon_hook(config),
             "0070-configure-sudo.hook.chroot": generate_sudo_hook(),
             "0080-configure-polkit.hook.chroot": generate_polkit_hook(),
             "0085-configure-autologin.hook.chroot": generate_autologin_hook(config),
