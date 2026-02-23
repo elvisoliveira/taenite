@@ -36,7 +36,8 @@ def generate_lb_config(config):
   --iso-volume "{config.distro_name} {config.distro_version}" \\
   --mirror-bootstrap "{DEFAULT_DEBIAN_MIRROR}" \\
   --mirror-binary "{DEFAULT_DEBIAN_MIRROR}" \\
-  --apt-recommends false
+  --apt-recommends false \\
+  --debian-installer live
 """
 
 def generate_setup_script(config):
@@ -68,6 +69,7 @@ def generate_dockerfile(config):
 # Basic setup
 RUN apt-get update && apt-get install -y \\
     live-build \\
+    debian-installer-launcher \\
     debootstrap
 
 WORKDIR /build

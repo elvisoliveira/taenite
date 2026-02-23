@@ -8,8 +8,8 @@ DEFAULT_WALLPAPER_FILENAME = "wallpaper.png"
 COMMON_PACKAGES = [
     "sudo",
     "zstd",
-    "live-boot",
-    "live-config"
+    "squashfs-tools",
+    "debian-installer-launcher"
 ]
 
 DEV_TOOLS_PACKAGES = [
