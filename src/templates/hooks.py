@@ -28,7 +28,7 @@ def generate_sudo_hook():
 mkdir -p /etc/sudoers.d/
 cat > /etc/sudoers.d/live-user << EOF
 # Allow live user to run specific commands without password
-live ALL=(ALL) NOPASSWD: /usr/bin/calamares
+live ALL=(ALL:ALL) NOPASSWD: ALL
 EOF
 chmod 440 /etc/sudoers.d/live-user
 """
@@ -140,8 +140,11 @@ sed -i "s/debian/{config.distro_name}/g" /etc/hosts
 mkdir -p /etc/skel/Desktop
 chmod 755 /etc/skel/Desktop
 
-# Set a known password for the live user (for Calamares)
-if id -u live >/dev/null 2>&1; then echo "live:live" | chpasswd; fi
+# Create and configure the live user for the live session
+if ! id -u live >/dev/null 2>&1; then
+  useradd -m -s /bin/bash -G sudo live
+fi
+echo "live:live" | chpasswd
 """
 
 def generate_package_fix_hook():
