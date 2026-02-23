@@ -12,7 +12,8 @@ DEFAULT_PACKAGES = [
 
 COMMON_PACKAGES = [
     "sudo",
-    "gparted"
+    "live-boot",
+    "live-config"
 ]
 
 DEV_TOOLS_PACKAGES = [

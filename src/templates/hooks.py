@@ -141,7 +141,7 @@ mkdir -p /etc/skel/Desktop
 chmod 755 /etc/skel/Desktop
 
 # Set a known password for the live user (for Calamares)
-echo "live:live" | chpasswd
+if id -u live >/dev/null 2>&1; then echo "live:live" | chpasswd; fi
 """
 
 def generate_package_fix_hook():

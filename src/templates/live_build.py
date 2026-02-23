@@ -17,7 +17,7 @@ Pin-Priority: 900
 """
 
 def generate_boot_params(config):
-    boot_params = f"boot=live components hostname={config.distro_name} username=live"
+    boot_params = f"boot=live components hostname={config.distro_name} username=live user-fullname=Live user-password=live"
     if config.boot_quiet:
         boot_params += " quiet splash"
     if not config.boot_splash:
@@ -68,13 +68,7 @@ def generate_dockerfile(config):
 # Basic setup
 RUN apt-get update && apt-get install -y \\
     live-build \\
-    debootstrap \\
-    curl \\
-    wget \\
-    git \\
-    python3 \\
-    zstd \\
-    sudo
+    debootstrap
 
 WORKDIR /build
 
