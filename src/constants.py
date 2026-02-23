@@ -5,13 +5,9 @@ DEBIAN_VERSION = "bookworm"
 DEFAULT_LOGO_FILENAME = "logo.png"
 DEFAULT_WALLPAPER_FILENAME = "wallpaper.png"
 
-DEFAULT_PACKAGES = [
-    "vim",
-    "curl",
-]
-
 COMMON_PACKAGES = [
     "sudo",
+    "zstd",
     "live-boot",
     "live-config"
 ]
@@ -44,14 +40,14 @@ DISPLAY_MANAGERS = {
 }
 
 BUILD_DIRECTORIES = [
-    "config",
     "assets",
     "calamares",
+    "config",
     "config/includes.chroot/etc/skel/",
     "config/includes.chroot/etc/skel/Desktop/",
+    "config/includes.chroot/etc/calamares/branding/default/",
     "config/includes.chroot/usr/share/backgrounds/",
     "config/includes.chroot/usr/share/icons/",
-    "config/includes.chroot/etc/calamares/branding/default/",
     "config/hooks/live",
     "config/package-lists/",
     "config/archives",
