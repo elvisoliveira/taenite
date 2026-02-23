@@ -17,6 +17,8 @@ from src.templates.hooks import (
     generate_launcher_icon_hook,
     generate_sudo_hook,
     generate_polkit_hook,
+    generate_autologin_hook,
+    generate_firewall_hook,
     generate_distro_info_hook,
     generate_package_fix_hook,
     generate_apt_config_hook,
@@ -33,7 +35,6 @@ from src.templates.packages import (
     generate_custom_package_list,
 )
 from src.templates.config_files import (
-    generate_custom_settings_desktop,
     generate_os_release,
     generate_installer_desktop,
 )
@@ -41,6 +42,7 @@ from src.templates.live_build import (
     generate_debian_sources,
     generate_debian_preferences,
     generate_setup_script,
+    generate_build_script,
     generate_dockerfile,
 )
 
@@ -107,13 +109,6 @@ class DockerManager:
     def _write_config_files(self, config, build_dir):
         includes_dir = os.path.join(build_dir, "config/includes.chroot")
 
-        autostart_desktop = os.path.join(
-            includes_dir,
-            "etc/skel/.config/autostart/custom-settings.desktop"
-        )
-        with open(autostart_desktop, "w") as f:
-            f.write(generate_custom_settings_desktop(config))
-
         os_release = os.path.join(includes_dir, "etc/os-release")
         with open(os_release, "w") as f:
             f.write(generate_os_release(config))
@@ -135,14 +130,17 @@ class DockerManager:
             "0060-create-launcher-icon.hook.chroot": generate_launcher_icon_hook(config),
             "0070-configure-sudo.hook.chroot": generate_sudo_hook(),
             "0080-configure-polkit.hook.chroot": generate_polkit_hook(),
+            "0085-configure-autologin.hook.chroot": generate_autologin_hook(config),
             "0090-update-distro-info.hook.chroot": generate_distro_info_hook(config),
+            "0095-configure-firewall.hook.chroot": generate_firewall_hook(config),
         }
 
         for filename, content in hooks.items():
-            hook_file = os.path.join(hooks_dir, filename)
-            with open(hook_file, "w") as f:
-                f.write(content)
-            os.chmod(hook_file, 0o755)
+            if content:
+                hook_file = os.path.join(hooks_dir, filename)
+                with open(hook_file, "w") as f:
+                    f.write(content)
+                os.chmod(hook_file, 0o755)
 
     def _write_apt_config(self, build_dir):
         archives_dir = os.path.join(build_dir, "config/archives")
@@ -161,6 +159,12 @@ class DockerManager:
             f.write(generate_setup_script(config))
         os.chmod(setup_file, 0o755)
 
+    def _write_build_script(self, build_dir):
+        build_file = os.path.join(build_dir, "build.sh")
+        with open(build_file, "w") as f:
+            f.write(generate_build_script())
+        os.chmod(build_file, 0o755)
+
     def _write_dockerfile(self, config, build_dir):
         dockerfile = os.path.join(build_dir, "Dockerfile")
         with open(dockerfile, "w") as f:
@@ -178,6 +182,7 @@ class DockerManager:
         self._write_hooks(config, self.temp_dir)
         self._write_apt_config(self.temp_dir)
         self._write_setup_script(config, self.temp_dir)
+        self._write_build_script(self.temp_dir)
         self._write_dockerfile(config, self.temp_dir)
 
         return self.temp_dir

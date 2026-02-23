@@ -5,6 +5,7 @@
 distro_name: TaeniteOS
 distro_version: 1.0
 desktop_environment: openbox
+display_manager: lightdm
 
 # Branding (Calamares Installer)
 calamares_branding_product_name: TaeniteOS

@@ -11,9 +11,7 @@ DEFAULT_PACKAGES = [
 ]
 
 COMMON_PACKAGES = [
-    "firefox-esr",
-    "libreoffice",
-    "vlc",
+    "gparted",
 ]
 
 DEV_TOOLS_PACKAGES = [
@@ -35,12 +33,18 @@ RESTRICTED_PACKAGES = [
 ]
 
 DESKTOP_ENVIRONMENTS = {
-    "gnome": "gnome gdm3",
-    "kde": "kde-standard sddm",
-    "xfce": "xfce4 xfce4-goodies lightdm",
-    "mate": "mate-desktop-environment lightdm",
-    "cinnamon": "cinnamon lightdm",
-    "openbox": "openbox lightdm",
+    "gnome": "gnome",
+    "kde": "kde-standard",
+    "xfce": "xfce4 xfce4-goodies",
+    "mate": "mate-desktop-environment",
+    "cinnamon": "cinnamon",
+    "openbox": "openbox",
+}
+
+DISPLAY_MANAGERS = {
+    "gdm3": "gdm3",
+    "sddm": "sddm",
+    "lightdm": "lightdm",
 }
 
 BUILD_DIRECTORIES = [

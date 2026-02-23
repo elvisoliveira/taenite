@@ -5,6 +5,7 @@
 distro_name: MyDistro
 distro_version: 0.1
 desktop_environment: openbox
+display_manager: lightdm
 
 # Branding (Calamares Installer)
 calamares_branding_product_name: MyDistro

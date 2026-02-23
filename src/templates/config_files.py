@@ -1,12 +1,3 @@
-def generate_custom_settings_desktop(config):
-    return f"""[Desktop Entry]
-Type=Application
-Name=Custom Settings
-Exec=sh -c 'sleep 10 && gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/custom-wallpaper.png && gsettings set org.gnome.desktop.background picture-uri-dark file:///usr/share/backgrounds/custom-wallpaper.png && gsettings set org.gnome.desktop.interface && gsettings set org.gnome.desktop.interface && gsettings set org.gnome.desktop.interface && gsettings set org.gnome.desktop.interface color-scheme prefer-dark'
-Hidden=false
-X-GNOME-Autostart-enabled=true
-"""
-
 def generate_os_release(config):
     distro_name_lower = config.distro_name.lower().replace(' ', '-')
     return f"""PRETTY_NAME="{config.distro_name} {config.distro_version}"

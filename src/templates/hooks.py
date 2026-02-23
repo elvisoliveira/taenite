@@ -100,6 +100,59 @@ EOL
 chmod +x /usr/local/bin/install-system
 """
 
+def generate_autologin_hook(config):
+    if not config.enable_autologin:
+        return ""
+
+    if config.display_manager == "gdm3":
+        return """#!/bin/bash
+# Configure GDM autologin
+mkdir -p /etc/gdm3/
+cat > /etc/gdm3/custom.conf << GDM
+[daemon]
+AutomaticLoginEnable=true
+AutomaticLogin=live
+GDM
+"""
+    elif config.display_manager == "lightdm":
+        return """#!/bin/bash
+# Configure LightDM autologin
+mkdir -p /etc/lightdm/lightdm.conf.d/
+cat > /etc/lightdm/lightdm.conf.d/50-autologin.conf << LIGHTDM
+[Seat:*]
+autologin-user=live
+autologin-user-timeout=0
+LIGHTDM
+"""
+    elif config.display_manager == "sddm":
+        return """#!/bin/bash
+# Configure SDDM autologin
+mkdir -p /etc/sddm.conf.d/
+cat > /etc/sddm.conf.d/autologin.conf << SDDM
+[Autologin]
+User=live
+Session=plasma.desktop
+SDDM
+"""
+    return ""
+
+def generate_firewall_hook(config):
+    if not config.enable_firewall:
+        return ""
+
+    firewall_script = """#!/bin/bash
+# Configure firewall
+ufw enable
+ufw default deny incoming
+ufw default allow outgoing"""
+
+    if config.enable_ssh:
+        firewall_script += """
+ufw allow ssh"""
+
+    firewall_script += "\n"
+    return firewall_script
+
 def generate_distro_info_hook(config):
     return f"""#!/bin/bash
 # Update distro information in system files
@@ -112,45 +165,6 @@ chmod 755 /etc/skel/Desktop
 
 # Set a known password for the live user (for Calamares)
 # echo "live:live" | chpasswd
-
-# Configure autologin if enabled
-if [ "{str(config.enable_autologin).lower()}" = "true" ]; then
-  if [ -d /etc/gdm3 ]; then
-    # Configure GDM autologin
-    mkdir -p /etc/gdm3/
-    cat > /etc/gdm3/custom.conf << GDM
-[daemon]
-AutomaticLoginEnable=true
-AutomaticLogin=live
-GDM
-  elif [ -d /etc/lightdm ]; then
-    # Configure LightDM autologin
-    mkdir -p /etc/lightdm/
-    cat > /etc/lightdm/lightdm.conf << LIGHTDM
-[SeatDefaults]
-autologin-user=live
-autologin-user-timeout=0
-LIGHTDM
-  elif [ -d /etc/sddm.conf.d ]; then
-    # Configure SDDM autologin
-    mkdir -p /etc/sddm.conf.d/
-    cat > /etc/sddm.conf.d/autologin.conf << SDDM
-[Autologin]
-User=live
-Session=plasma.desktop
-SDDM
-  fi
-fi
-
-# Configure firewall if enabled
-if [ "{str(config.enable_firewall).lower()}" = "true" ]; then
-  ufw enable
-  ufw default deny incoming
-  ufw default allow outgoing
-  if [ "{str(config.enable_ssh).lower()}" = "true" ]; then
-    ufw allow ssh
-  fi
-fi
 """
 
 def generate_package_fix_hook():

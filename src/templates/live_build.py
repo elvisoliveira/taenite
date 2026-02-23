@@ -51,6 +51,17 @@ distro_version="{config.distro_version}"
 {generate_lb_config(config)}
 """
 
+def generate_build_script():
+    return """#!/bin/bash
+set -e
+cd /build
+./setup.sh
+find /build/config/hooks/ -type f -name "*.hook.*" -exec chmod +x {} \\;
+lb build
+find /build -name "*.iso" -type f -exec cp -v {} /build/output/ \\;
+echo "Build completed. Check output directory for the ISO file."
+"""
+
 def generate_dockerfile(config):
     return """FROM debian:12
 
@@ -62,6 +73,7 @@ RUN apt-get update && apt-get install -y \\
     wget \\
     git \\
     python3 \\
+    zstd \\
     sudo
 
 WORKDIR /build
@@ -71,23 +83,13 @@ COPY config/ /build/config/
 COPY assets/ /build/assets/
 COPY calamares/ /build/calamares/
 COPY setup.sh /build/setup.sh
-
-# Make scripts executable
-RUN chmod +x /build/setup.sh
+COPY build.sh /build/build.sh
 
 # Create output directory
 RUN mkdir -p /build/output
 
-# Build script
-RUN echo '#!/bin/bash' > /build/build.sh && \\
-    echo 'set -e' >> /build/build.sh && \\
-    echo 'cd /build' >> /build/build.sh && \\
-    echo './setup.sh' >> /build/build.sh && \\
-    echo 'find /build/config/hooks/ -type f -name "*.hook.*" -exec chmod +x {} \\;' >> /build/build.sh && \\
-    echo 'lb build' >> /build/build.sh && \\
-    echo 'find /build -name "*.iso" -type f -exec cp -v {} /build/output/ \\;' >> /build/build.sh && \\
-    echo 'echo "Build completed. Check output directory for the ISO file."' >> /build/build.sh && \\
-    chmod +x /build/build.sh
+# Make scripts executable
+RUN chmod +x /build/setup.sh /build/build.sh
 
 CMD ["/build/build.sh"]
 """

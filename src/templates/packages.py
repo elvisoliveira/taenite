@@ -1,5 +1,6 @@
 from src.constants import (
     DESKTOP_ENVIRONMENTS,
+    DISPLAY_MANAGERS,
     COMMON_PACKAGES,
     DEV_TOOLS_PACKAGES,
     RESTRICTED_PACKAGES,
@@ -9,7 +10,9 @@ def generate_desktop_package_list(config):
     return "task-desktop"
 
 def generate_desktop_env_package_list(config):
-    return DESKTOP_ENVIRONMENTS.get(config.desktop_environment, "openbox lightdm")
+    desktop_packages = DESKTOP_ENVIRONMENTS.get(config.desktop_environment, "openbox")
+    display_manager_packages = DISPLAY_MANAGERS.get(config.display_manager, "lightdm")
+    return f"{desktop_packages} {display_manager_packages}"
 
 def generate_common_package_list():
     return " ".join(COMMON_PACKAGES)

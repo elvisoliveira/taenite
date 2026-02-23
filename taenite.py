@@ -8,10 +8,8 @@ logger = logging.getLogger("taenite")
 from src.config import BuildConfig
 from src.docker_manager import DockerManager
 
-
 def _print_callback(message):
     print(message)
-
 
 if __name__ == "__main__":
     config_path = os.path.abspath("config.yaml")
@@ -21,5 +19,5 @@ if __name__ == "__main__":
 
     config = BuildConfig.from_yaml_file(config_path)
     manager = DockerManager()
-    ok = manager.start_build(config, _print_callback, output_dir=".")
+    ok = manager.start_build(config, _print_callback, output_dir="../taenite")
     sys.exit(0 if ok else 1)
