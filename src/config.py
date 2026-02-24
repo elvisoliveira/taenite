@@ -9,13 +9,7 @@ class BuildConfig:
     desktop_environment: str = "openbox"
     display_manager: str = "lightdm"
 
-    calamares_branding_product_name: str = "TaeniteOS"
-    calamares_branding_short_product_name: str = "Taenite"
-    calamares_branding_version: str = "1.0"
-    calamares_branding_short_version: str = "1.0"
-
     logo_path: str = ""
-    wallpaper_path: str = ""
 
     timezone: str = "UTC"
     locale: str = "en_US.UTF-8"

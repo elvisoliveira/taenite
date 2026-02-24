@@ -22,61 +22,6 @@ BACKSPACE="guess"
 KEYBOARD
 """
 
-def generate_sudo_hook():
-    return """#!/bin/bash
-# Configure sudo for the live user (no password for calamares)
-mkdir -p /etc/sudoers.d/
-cat > /etc/sudoers.d/live-user << EOF
-# Allow live user to run specific commands without password
-live ALL=(ALL:ALL) NOPASSWD: ALL
-EOF
-chmod 440 /etc/sudoers.d/live-user
-"""
-
-def generate_polkit_hook():
-    return """#!/bin/bash
-# Create PolicyKit rule for calamares
-mkdir -p /etc/polkit-1/localauthority/50-local.d/
-cat > /etc/polkit-1/localauthority/50-local.d/99-live-user-calamares.pkla << EOF
-[Allow live user to run Calamares]
-Identity=unix-user:live
-Action=org.kde.calamares.pkexec.run
-ResultAny=yes
-ResultInactive=yes
-ResultActive=yes
-EOF
-
-# Create PolicyKit file for Calamares
-mkdir -p /usr/share/polkit-1/actions/
-cat > /usr/share/polkit-1/actions/org.kde.calamares.pkexec.policy << EOL
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE policyconfig PUBLIC
- "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
- "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
-<policyconfig>
-  <action id="org.kde.calamares.pkexec.run">
-    <description>Run Calamares Installer</description>
-    <message>Authentication is required to install the system</message>
-    <icon_name>calamares</icon_name>
-    <defaults>
-      <allow_any>auth_admin</allow_any>
-      <allow_inactive>auth_admin</allow_inactive>
-      <allow_active>auth_admin</allow_active>
-    </defaults>
-    <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/calamares</annotate>
-    <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
-  </action>
-</policyconfig>
-EOL
-
-# Create direct launcher for Calamares (alternative method)
-cat > /usr/local/bin/install-system << EOL
-#!/bin/bash
-pkexec calamares
-EOL
-chmod +x /usr/local/bin/install-system
-"""
-
 def generate_autologin_hook(config):
     if not config.enable_autologin:
         return ""

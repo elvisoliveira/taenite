@@ -7,15 +7,10 @@ logger = logging.getLogger("taenite")
 
 from src.constants import (
     BUILD_DIRECTORIES,
-    DEFAULT_LOGO_FILENAME,
-    DEFAULT_WALLPAPER_FILENAME,
 )
-from src.templates.calamares import generate_calamares_branding
 from src.templates.hooks import (
     generate_locale_timezone_hook,
     generate_keyboard_hook,
-    generate_sudo_hook,
-    generate_polkit_hook,
     generate_autologin_hook,
     generate_firewall_hook,
     generate_distro_info_hook,
@@ -29,12 +24,10 @@ from src.templates.packages import (
     generate_dev_tools_package_list,
     generate_ssh_package_list,
     generate_firewall_package_list,
-    generate_installer_package_list,
     generate_custom_package_list,
 )
 from src.templates.config_files import (
     generate_os_release,
-    generate_installer_desktop,
 )
 from src.templates.live_build import (
     generate_debian_sources,
@@ -52,35 +45,10 @@ class DockerManager:
         for directory in BUILD_DIRECTORIES:
             os.makedirs(os.path.join(base_dir, directory), exist_ok=True)
 
-    def _copy_assets(self, config, build_dir):
-        assets_dir = os.path.join(build_dir, "assets")
-
-        if config.logo_path and os.path.exists(config.logo_path):
-            shutil.copy(
-                config.logo_path,
-                os.path.join(assets_dir, DEFAULT_LOGO_FILENAME)
-            )
-
-        if config.wallpaper_path and os.path.exists(config.wallpaper_path):
-            shutil.copy(
-                config.wallpaper_path,
-                os.path.join(assets_dir, DEFAULT_WALLPAPER_FILENAME)
-            )
-
-    def _write_calamares_branding(self, config, build_dir):
-        branding_file = os.path.join(
-            build_dir,
-            "calamares",
-            "branding.yaml"
-        )
-        with open(branding_file, "w") as f:
-            f.write(generate_calamares_branding(config))
-
     def _write_package_lists(self, config, build_dir):
         package_lists_dir = os.path.join(build_dir, "config/package-lists")
 
         package_lists = {
-            "installer.list.chroot": generate_installer_package_list(),
             "desktop.list.chroot": generate_desktop_package_list(config),
             "desktop-env.list.chroot": generate_desktop_env_package_list(config),
             "common.list.chroot": generate_common_package_list(),
@@ -110,12 +78,6 @@ class DockerManager:
         with open(os_release, "w") as f:
             f.write(generate_os_release(config))
 
-        installer_desktop = os.path.join(includes_dir, "etc/skel/Desktop/install.desktop")
-        with open(installer_desktop, "w") as f:
-            f.write(generate_installer_desktop(config))
-
-        os.chmod(installer_desktop, 0o755)
-
     def _write_hooks(self, config, build_dir):
         hooks_dir = os.path.join(build_dir, "config/hooks/live")
 
@@ -124,8 +86,6 @@ class DockerManager:
             "0025-fix-package-issues.hook.chroot": generate_package_fix_hook(),
             "0050-configure-locale-timezone.hook.chroot": generate_locale_timezone_hook(config),
             "0051-configure-keyboard.hook.chroot": generate_keyboard_hook(config),
-            "0070-configure-sudo.hook.chroot": generate_sudo_hook(),
-            "0080-configure-polkit.hook.chroot": generate_polkit_hook(),
             "0085-configure-autologin.hook.chroot": generate_autologin_hook(config),
             "0090-update-distro-info.hook.chroot": generate_distro_info_hook(config),
             "0095-configure-firewall.hook.chroot": generate_firewall_hook(config),
@@ -171,8 +131,6 @@ class DockerManager:
         logger.debug(f"Using build directory: {self.temp_dir}")
 
         self._create_build_directories(self.temp_dir)
-        self._copy_assets(config, self.temp_dir)
-        self._write_calamares_branding(config, self.temp_dir)
         self._write_package_lists(config, self.temp_dir)
         self._write_config_files(config, self.temp_dir)
         self._write_hooks(config, self.temp_dir)

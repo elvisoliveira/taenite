@@ -25,8 +25,5 @@ def generate_ssh_package_list(config):
 def generate_firewall_package_list(config):
     return "ufw gufw" if config.enable_firewall else ""
 
-def generate_installer_package_list():
-    return "calamares calamares-settings-debian"
-
 def generate_custom_package_list(config):
     return " ".join(config.packages)

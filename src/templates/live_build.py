@@ -74,10 +74,8 @@ RUN apt-get update && apt-get install -y \\
 
 WORKDIR /build
 
-# Copy config, assets and scripts
+# Copy config and scripts
 COPY config/ /build/config/
-COPY assets/ /build/assets/
-COPY calamares/ /build/calamares/
 COPY setup.sh /build/setup.sh
 COPY build.sh /build/build.sh
 

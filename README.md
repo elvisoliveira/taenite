@@ -1,6 +1,6 @@
 # Taenite ISO Builder
 
-`taenite.py` provides a `DockerManager` that builds a Debian-based Linux ISO in Docker, with Calamares branding and distribution customization driven by a `config` object.
+`taenite.py` provides a `DockerManager` that builds a Debian-based Linux ISO in Docker, with distribution customization driven by a `config` object.
 
 ## What This File Does
 
@@ -8,7 +8,6 @@ The build pipeline in `taenite.py`:
 
 1. Creates a temporary Docker build context.
 2. Writes config and branding files into that context.
-3. Optionally copies logo/wallpaper assets.
 4. Generates live-build hooks and Debian apt source files.
 5. Builds a Docker image (`debian:12` base + `live-build`).
 6. Runs the container and executes live-build to produce an ISO.
@@ -96,15 +95,6 @@ The `config` object passed to `start_build(config, callback)` must expose these 
 - `distro_version` (`str`): Version label used in ISO metadata and branding.
 - `desktop_environment` (`str`): Intended DE selection (`gnome`, `kde`, `xfce`, `mate`, `cinnamon`, `openbox`). Invalid values fall back to GNOME in the legacy setup script logic.
 
-### Branding / Assets
-
-- `logo_path` (`str | None`): Path to logo image. If file exists, copied as `logo.png`.
-- `wallpaper_path` (`str | None`): Path to wallpaper image. If file exists, copied as `wallpaper.png` / Calamares welcome image.
-- `calamares_branding_product_name` (`str`)
-- `calamares_branding_short_product_name` (`str`)
-- `calamares_branding_version` (`str`)
-- `calamares_branding_short_version` (`str`)
-
 ### Localization / Host
 
 - `timezone` (`str`): e.g. `America/New_York`.
@@ -153,7 +143,6 @@ The second write overwrites the first one, so behavior present only in the first
 During build context creation, the script creates files such as:
 
 - `config/build_config.yaml`
-- `calamares/branding.yaml`
 - `config/archives/debian.list.chroot`
 - `config/archives/debian.pref.chroot`
 - `config/hooks/live/*.hook.chroot`

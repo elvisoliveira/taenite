@@ -7,16 +7,6 @@ distro_version: 0.1
 desktop_environment: openbox
 display_manager: lightdm
 
-# Branding (Calamares Installer)
-calamares_branding_product_name: MyDistro
-calamares_branding_short_product_name: MyDistro
-calamares_branding_version: 0.1
-calamares_branding_short_version: 0.1
-
-# Assets (absolute or relative paths)
-logo_path: ./assets/logo.png
-wallpaper_path: ./assets/wallpaper.png
-
 # Localization and System Settings
 timezone: UTC
 locale: en_US.UTF-8

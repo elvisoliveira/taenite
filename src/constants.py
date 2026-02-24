@@ -2,9 +2,6 @@ DEFAULT_DEBIAN_MIRROR = "http://deb.debian.org/debian"
 DEBIAN_SECURITY_MIRROR = "http://security.debian.org/debian-security"
 DEBIAN_VERSION = "bookworm"
 
-DEFAULT_LOGO_FILENAME = "logo.png"
-DEFAULT_WALLPAPER_FILENAME = "wallpaper.png"
-
 COMMON_PACKAGES = [
     "sudo",
     "zstd",
@@ -40,14 +37,9 @@ DISPLAY_MANAGERS = {
 }
 
 BUILD_DIRECTORIES = [
-    "assets",
-    "calamares",
     "config",
     "config/includes.chroot/etc/skel/",
     "config/includes.chroot/etc/skel/Desktop/",
-    "config/includes.chroot/etc/calamares/branding/default/",
-    "config/includes.chroot/usr/share/backgrounds/",
-    "config/includes.chroot/usr/share/icons/",
     "config/hooks/live",
     "config/package-lists/",
     "config/archives",
